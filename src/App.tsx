@@ -2,24 +2,26 @@ import headerImage from "./images/header-image.png"
 import Header from "./components/Header.tsx"
 import { useState } from "react"
 import TodoItemList from "./components/TodoItemList.tsx"
+import InputNewTodo from "./components/InputNewTodo.tsx"
 
 
 export type TodoProp = {
-  id : number,
+  id : string,
   description : string,
-  isCompleted : boolean
+  Completed : boolean
 }
 
 export default function App(){
   const [todos, setTodos] = useState<TodoProp[]>([])
 
-  const handleAddGoal = () => {
+  const handleAddTodo = (todo : string) => {
     setTodos(prevTodos => {
       const newTodos : TodoProp = {
-        id : Math.random(),
-        description : "",
-        isCompleted : false
+        id : crypto.randomUUID(),
+        description : todo,
+        Completed : false
       }
+      console.log(todos); 
       return [...prevTodos, newTodos]
     })
   }
@@ -29,7 +31,7 @@ export default function App(){
       <Header image={{src : headerImage , alt : "todo image"}}>
         <h2>Todo App</h2>
       </Header>
-      <button onClick={handleAddGoal}>Add</button>
+      <InputNewTodo addTodo={handleAddTodo}/>
       <TodoItemList todos={todos} />
     </main>
   )
