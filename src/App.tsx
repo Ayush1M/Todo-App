@@ -20,19 +20,36 @@ export default function App(){
         id : crypto.randomUUID(),
         description : todo,
         Completed : false
-      }
-      console.log(todos); 
+      } 
       return [...prevTodos, newTodos]
     })
   }
 
+  const toggleTodos = (id : string, Completed : boolean) =>{
+    setTodos(prevTodos => {
+      return prevTodos.map(todo => {
+        if(todo.id === id){
+          return {...todo, Completed}
+        }
+        return todo
+      })
+    })
+  }
+
+  function DeleteTodos(id : string){
+    setTodos(prevTodos => prevTodos.filter(todo => todo.id !== id))
+  }
+
+
   return(
-    <main>
+    <main className="flex flex-col items-center">
       <Header image={{src : headerImage , alt : "todo image"}}>
         <h2>Todo App</h2>
       </Header>
-      <InputNewTodo addTodo={handleAddTodo}/>
-      <TodoItemList todos={todos} />
+      <div>
+      <InputNewTodo addTodo={handleAddTodo} />
+      <TodoItemList todos={todos} toggleTodos={toggleTodos} DeleteTodos={DeleteTodos} />
+      </div>
     </main>
   )
 }

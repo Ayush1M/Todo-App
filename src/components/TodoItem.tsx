@@ -1,15 +1,15 @@
 import {FC, type ReactNode } from "react"
 
 type TodoItemProp = {
-    id : number,
-    children : ReactNode
+    id : string,
+    children : ReactNode,
 }
 
 const TodoItem : FC<TodoItemProp> = ({ children }) => {
     return (
         <>
         <div>
-        <p>{children}</p>
+        <p className="mt-4">{children}</p>
         </div>
         </>
     )
