@@ -2,10 +2,20 @@
 export default {
   content: [
     "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
+    "./src/**/*.{jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily : {
+        "truculenta" : ["Truculenta"]
+      },
+      colors : {
+        "black" : "#15151E",
+        "secondary" : "#27293F",
+        "white" : "#fff",
+        "orange" : "#E78413"
+      },
+    },
   },
   plugins: [],
 }
