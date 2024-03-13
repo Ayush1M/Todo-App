@@ -10,7 +10,7 @@ type HeaderProp = {
 
 const Header : FC<HeaderProp> = ({image, children}) => {
     return (
-        <header className="text-4xl flex items-center justify-center min-h-64">
+        <header className="text-4xl flex items-center justify-center min-h-36 text-white">
             {children}
             <img src={image.src} alt={image.alt} className="ml-4" />
         </header>

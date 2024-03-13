@@ -1,6 +1,6 @@
 import headerImage from "./images/header-image.png"
 import Header from "./components/Header.tsx"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import TodoItemList from "./components/TodoItemList.tsx"
 import InputNewTodo from "./components/InputNewTodo.tsx"
 
@@ -13,6 +13,13 @@ export type TodoProp = {
 
 export default function App(){
   const [todos, setTodos] = useState<TodoProp[]>([])
+  const [status, setStatus] = useState<string>("all")
+  const [filterTodos, setFilterTodos] = useState<TodoProp[]>([])
+
+  useEffect(() => {
+    filterHandler(status)
+  }, [todos, status])
+
 
   const handleAddTodo = (todo : string) => {
     setTodos(prevTodos => {
@@ -36,19 +43,33 @@ export default function App(){
     })
   }
 
-  function DeleteTodos(id : string){
+  const DeleteTodos = (id : string) => {
     setTodos(prevTodos => prevTodos.filter(todo => todo.id !== id))
+  }
+
+  const filterHandler = (status : string) => {
+    if(status === "completed"){
+      setFilterTodos(todos.filter(todo => todo.Completed === true))
+    }else if (status === "active"){
+      setFilterTodos(todos.filter(todo => todo.Completed === false))
+    }else{
+      setFilterTodos(todos)
+    }
   }
 
 
   return(
-    <main className="flex flex-col items-center">
+    <main className="flex flex-col items-center bg-black min-h-screen font-truculenta">
       <Header image={{src : headerImage , alt : "todo image"}}>
         <h2>Todo App</h2>
       </Header>
       <div>
-      <InputNewTodo addTodo={handleAddTodo} />
-      <TodoItemList todos={todos} toggleTodos={toggleTodos} DeleteTodos={DeleteTodos} />
+      <InputNewTodo addTodo={handleAddTodo} setStatus={setStatus} />
+      <TodoItemList 
+      todos={todos} 
+      toggleTodos={toggleTodos} 
+      DeleteTodos={DeleteTodos} 
+      filterTodos={filterTodos} />
       </div>
     </main>
   )
