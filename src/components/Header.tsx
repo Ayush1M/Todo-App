@@ -22,7 +22,7 @@ const Header : FC<HeaderProp> = ({image, children, setDarkMode, darkMode}) => {
             </div>
             <button className="text-black dark:text-white" 
             onClick={() => setDarkMode(!darkMode)}>
-                {darkMode ? <MdLightMode /> : <MdDarkMode/>}
+                {darkMode ? <MdDarkMode/> : <MdLightMode />}
             </button>
         </header>
     )
