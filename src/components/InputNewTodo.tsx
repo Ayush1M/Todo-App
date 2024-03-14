@@ -1,4 +1,4 @@
-import { ChangeEvent, FormEvent, useRef } from "react"
+import { ChangeEvent, FormEvent, useState} from "react"
 
 type InputProp = { 
     setStatus : React.Dispatch<React.SetStateAction<string>>
@@ -7,20 +7,19 @@ type InputProp = {
 
 const InputNewTodo = ({addTodo, setStatus} : InputProp) => {
 
-    const todo = useRef<HTMLInputElement>(null)
+    const [text, setText] = useState<string>("")
+
     
     function handleSubmit(e : FormEvent<HTMLFormElement>){
         e.preventDefault()
-        
-        const enteredTodo = todo.current!.value
-             
-        e.currentTarget.reset()
-        addTodo(enteredTodo)
+
+        addTodo(text)
+        setText("")
     } 
 
     const statusHandler = (e : ChangeEvent<HTMLSelectElement>) => {
         setStatus(e.target.value);
-    }
+    } 
 
     return(
         <>
@@ -36,9 +35,12 @@ const InputNewTodo = ({addTodo, setStatus} : InputProp) => {
         <input className="text-2xl border-2 border-slate-300 rounded-lg mr-4 py-2 pl-2" 
         type="text" 
         id="todo" 
-        placeholder="new todo" 
-        ref={todo} />
-        <button className="px-4 py-2 rounded-xl text-2xl bg-orange hover:opacity-70 hover:text-white">Add
+        placeholder="new todo"
+        value={text}
+        onChange={e => setText(e.target.value)} />
+        <button className="px-4 py-2 rounded-xl text-2xl bg-orange hover:opacity-70 cursor-pointer hover:text-white"
+        disabled={text === ""}>
+            Add
         </button>
         </form>  
         </>

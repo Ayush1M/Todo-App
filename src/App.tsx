@@ -15,6 +15,7 @@ export default function App(){
   const [todos, setTodos] = useState<TodoProp[]>([])
   const [status, setStatus] = useState<string>("all")
   const [filterTodos, setFilterTodos] = useState<TodoProp[]>([])
+  
 
   useEffect(() => {
     filterHandler(status)
