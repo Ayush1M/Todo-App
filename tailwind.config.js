@@ -4,10 +4,11 @@ export default {
     "./index.html",
     "./src/**/*.{jsx,tsx}",
   ],
+  darkMode : "selector",
   theme: {
     extend: {
       fontFamily : {
-        "truculenta" : ["Truculenta"]
+        "sans" : ["Roboto Condensed", "sans-serif"]
       },
       colors : {
         "black" : "#15151E",

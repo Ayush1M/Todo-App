@@ -15,11 +15,20 @@ export default function App(){
   const [todos, setTodos] = useState<TodoProp[]>([])
   const [status, setStatus] = useState<string>("all")
   const [filterTodos, setFilterTodos] = useState<TodoProp[]>([])
+  const [darkMode, setDarkMode] = useState<boolean>(false)
   
 
   useEffect(() => {
     filterHandler(status)
   }, [todos, status])
+
+  useEffect(() => {
+    if(darkMode){
+      document.documentElement.classList.add('dark')
+    }else {
+      document.documentElement.classList.remove('dark')
+    }
+  }, [darkMode])
 
 
   const handleAddTodo = (todo : string) => {
@@ -58,10 +67,9 @@ export default function App(){
     }
   }
 
-
   return(
-    <main className="flex flex-col items-center bg-black min-h-screen font-truculenta">
-      <Header image={{src : headerImage , alt : "todo image"}}>
+    <main className="flex flex-col items-center min-h-screen dark:bg-black">
+      <Header image={{src : headerImage , alt : "todo image"}} setDarkMode={setDarkMode} darkMode ={darkMode}>
         <h2>Todo App</h2>
       </Header>
       <div>
