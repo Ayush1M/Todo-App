@@ -29,7 +29,3 @@ const Header : FC<HeaderProp> = ({image, children, setDarkMode, darkMode}) => {
 }
 
 export default Header
-
-
-{/* <MdLightMode /> */}
-// MdDarkMode
