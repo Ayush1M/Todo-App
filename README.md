@@ -24,7 +24,4 @@ A Todo Application made with React + TypeScript and for styling Tailwind CSS is 
 
 ## Screenshot
 
-<p align="center"><img width="450px" src="./src/images/screenshot.png" />
-     <img width="450px" src="./src/images/screenshot1.png" />
-     <img width="450px" src="./src/images/screenshot2.png" />
-</p>
+<p><img width="400px" src="./src/images/screenshot3.png" /><img width="400px" src="./src/images/screenshot.png" /><img width="400px" src="./src/images/screenshot1.png" /><img width="400px" src="./src/images/screenshot2.png" /></p>
