@@ -3,6 +3,7 @@ import Header from "./components/Header.tsx"
 import { useEffect, useState } from "react"
 import TodoItemList from "./components/TodoItemList.tsx"
 import InputNewTodo from "./components/InputNewTodo.tsx"
+import loadingImg from "./images/loading-image.png"
 
 
 export type TodoProp = {
@@ -11,16 +12,23 @@ export type TodoProp = {
   Completed : boolean
 }
 
+type Timer = ReturnType<typeof setTimeout>
+
 export default function App(){
   const [todos, setTodos] = useState<TodoProp[]>([])
   const [status, setStatus] = useState<string>("all")
   const [filterTodos, setFilterTodos] = useState<TodoProp[]>([])
   const [darkMode, setDarkMode] = useState<boolean>(false)
-  
+  const [loading, setLoading] = useState<boolean>(true)
+  const [timeOutData, setTimeOutData] = useState<string>("")
+
 
   useEffect(() => {
     filterHandler(status)
-  }, [todos, status])
+    setTimeout(() => {
+      setLoading(false)
+    }, 4000)
+  }, [todos, status, loading])
 
   useEffect(() => {
     if(darkMode){
@@ -67,8 +75,16 @@ export default function App(){
     }
   }
 
+  const timer : Timer = setTimeout(() => {
+    setTimeOutData("Add and manage day to day tasks")
+  }, 2000)
+
   return(
-    <main className="flex flex-col items-center min-h-screen dark:bg-black">
+    <main className={loading ? "flex flex-col items-center min-h-screen bg-black" : "flex flex-col items-center min-h-screen dark:bg-black"}>
+      {loading ? 
+      <div className="flex flex-col items-center my-auto animate-bounce text-white"><img className="w-72 h-72" src={loadingImg} alt="loading image" /><h2 className="text-5xl mt-8">Todo</h2><h2 className="text-4xl mt-4">{timeOutData}</h2>
+      </div> : 
+      <div>
       <Header image={{src : headerImage , alt : "todo image"}} setDarkMode={setDarkMode} darkMode ={darkMode}>
         <h2>Todo App</h2>
       </Header>
@@ -80,6 +96,7 @@ export default function App(){
       DeleteTodos={DeleteTodos} 
       filterTodos={filterTodos} />
       </div>
+      </div>}
     </main>
   )
 }

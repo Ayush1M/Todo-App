@@ -14,8 +14,8 @@ type HeaderProp = {
 
 const Header : FC<HeaderProp> = ({image, children, setDarkMode, darkMode}) => {
     return (
-        <header className="text-4xl flex items-center justify-between min-h-36 w-4/12 text-black dark:text-white">
-            <div className="flex items-center">
+        <header className="text-4xl flex items-center justify-between min-h-36 w-full text-black dark:text-white">
+            <div className="flex">
             {children}
             <img src={image.src} alt={image.alt} className="ml-4" />
             <button className="text-white dark:text-black"></button>
