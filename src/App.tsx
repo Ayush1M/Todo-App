@@ -1,6 +1,6 @@
 import headerImage from "./images/header-image.png"
 import Header from "./components/Header.tsx"
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import TodoItemList from "./components/TodoItemList.tsx"
 import InputNewTodo from "./components/InputNewTodo.tsx"
 import loadingImg from "./images/loading-image.png"
@@ -12,8 +12,6 @@ export type TodoProp = {
   Completed : boolean
 }
 
-type Timer = ReturnType<typeof setTimeout>
-
 export default function App(){
   const [todos, setTodos] = useState<TodoProp[]>([])
   const [status, setStatus] = useState<string>("all")
@@ -21,6 +19,7 @@ export default function App(){
   const [darkMode, setDarkMode] = useState<boolean>(false)
   const [loading, setLoading] = useState<boolean>(true)
   const [timeOutData, setTimeOutData] = useState<string>("")
+  const timer = useRef<number | null>(null)
 
 
   useEffect(() => {
@@ -37,6 +36,12 @@ export default function App(){
       document.documentElement.classList.remove('dark')
     }
   }, [darkMode])
+
+  useEffect(() => {
+    timer.current = setTimeout(() => {
+      setTimeOutData("Add and manage day to day tasks")
+    }, 2000)
+  }, [])
 
 
   const handleAddTodo = (todo : string) => {
@@ -74,11 +79,7 @@ export default function App(){
       setFilterTodos(todos)
     }
   }
-
-  const timer : Timer = setTimeout(() => {
-    setTimeOutData("Add and manage day to day tasks")
-  }, 2000)
-
+ 
   return(
     <main className={loading ? "flex flex-col items-center min-h-screen bg-black" : "flex flex-col items-center min-h-screen dark:bg-black"}>
       {loading ? 
