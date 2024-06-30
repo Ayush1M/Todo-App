@@ -61,11 +61,11 @@ const TodoItemList : FC<TodoListProps> = ({ todos, toggleTodos, DeleteTodos, fil
       </TodoItem>
       <div>
 
-      {editText && todo.id === editText.id ?
+      {!todo.Completed && (editText && todo.id === editText.id ?
       <button className="bg-white text-black hover:text-orange-400 p-1 rounded-lg font-bold hover:opacity-70 mr-4" 
       onClick={handleSaveEdit} disabled={editText.description === ""}>Save</button> : 
       <button className="bg-white text-black hover:text-orange-400 p-1 rounded-lg font-bold hover:opacity-70 mr-4" 
-      onClick={() => handleEdit(todo.id)}>Edit</button>} 
+      onClick={() => handleEdit(todo.id)}>Edit</button>)} 
       <button className="bg-white text-black hover:text-orange-400 p-1 rounded-lg font-bold hover:opacity-70" 
       onClick={() => DeleteTodos(todo.id)}>Delete</button>
       </div>
