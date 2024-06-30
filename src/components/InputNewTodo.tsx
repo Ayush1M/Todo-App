@@ -37,7 +37,7 @@ const InputNewTodo = ({addTodo, setStatus, text, setText} : InputProp) => {
         placeholder="new todo"
         value={text}
         onChange={e => setText(e.target.value)} />
-        <button className="px-4 py-2 rounded-xl text-2xl bg-orange hover:opacity-70 cursor-pointer hover:text-white"
+        <button className="px-4 py-2 rounded-xl text-2xl bg-orange-500 hover:bg-orange-400 cursor-pointer hover:text-white"
         disabled={text === ""}>
             Add
         </button>

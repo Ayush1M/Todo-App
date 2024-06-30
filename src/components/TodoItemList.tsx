@@ -43,7 +43,7 @@ const TodoItemList : FC<TodoListProps> = ({ todos, toggleTodos, DeleteTodos, fil
       {todos.length === 0 && <div className="text-center mt-4 py-4 rounded-lg text-white text-2xl bg-secondary">No Todos</div>}
       <ul>
       {filterTodos.map(todo => (
-      <li key={todo.id} className={todo.Completed ? "flex items-center justify-between mt-4 px-6 py-4 rounded-xl text-white bg-orange" : "flex items-center justify-between bg-secondary mt-4 px-6 py-4 rounded-xl text-white"}>
+      <li key={todo.id} className={todo.Completed ? "flex items-center justify-between mt-4 px-6 py-4 rounded-xl text-white bg-orange-500" : "flex items-center justify-between bg-secondary mt-4 px-6 py-4 rounded-xl text-white"}>
       <TodoItem id={todo.id}>
       { editText && todo.id === editText.id ?
       <input type="text"
