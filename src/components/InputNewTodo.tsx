@@ -1,15 +1,14 @@
-import { ChangeEvent, FormEvent, useState} from "react"
+import { ChangeEvent, FormEvent} from "react"
 
 type InputProp = { 
-    setStatus : React.Dispatch<React.SetStateAction<string>>
-    addTodo : (todo : string) => void
+    setStatus : React.Dispatch<React.SetStateAction<string>>,
+    addTodo : (todo : string) => void,
+    text : string,
+    setText : React.Dispatch<React.SetStateAction<string>>,
 }
 
-const InputNewTodo = ({addTodo, setStatus} : InputProp) => {
+const InputNewTodo = ({addTodo, setStatus, text, setText} : InputProp) => {
 
-    const [text, setText] = useState<string>("")
-
-    
     function handleSubmit(e : FormEvent<HTMLFormElement>){
         e.preventDefault()
 
