@@ -9,7 +9,8 @@ import loadingImg from "./images/loading-image.png"
 export type TodoProp = {
   id : string,
   description : string,
-  Completed : boolean
+  Completed : boolean,
+  edit ?: boolean,
 }
 
 export default function App(){
@@ -20,6 +21,8 @@ export default function App(){
   const [loading, setLoading] = useState<boolean>(true)
   const [timeOutData, setTimeOutData] = useState<string>("")
   const timer = useRef<number | null>(null)
+  const [text, setText] = useState<string>("")
+  
 
 
   useEffect(() => {
@@ -49,7 +52,7 @@ export default function App(){
       const newTodos : TodoProp = {
         id : crypto.randomUUID(),
         description : todo,
-        Completed : false
+        Completed : false,
       } 
       return [...prevTodos, newTodos]
     })
@@ -90,9 +93,10 @@ export default function App(){
         <h2>Todo App</h2>
       </Header>
       <div>
-      <InputNewTodo addTodo={handleAddTodo} setStatus={setStatus} />
+      <InputNewTodo addTodo={handleAddTodo} setStatus={setStatus} text={text} setText={setText} />
       <TodoItemList 
-      todos={todos} 
+      todos={todos}
+      setTodos = {setTodos}
       toggleTodos={toggleTodos} 
       DeleteTodos={DeleteTodos} 
       filterTodos={filterTodos} />
